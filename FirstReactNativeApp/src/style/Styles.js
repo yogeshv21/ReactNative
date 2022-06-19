@@ -6,9 +6,6 @@ export const Styles = StyleSheet.create({
       backgroundColor: '#E8F9FD',
     },
     inp_btn_cont: {
-      backgroundColor: 'white',
-      paddingHorizontal: 20,
-      paddingVertical: 10,
       flexDirection: 'row',
       justifyContent:'space-between',
       alignItems: 'center'
@@ -22,18 +19,13 @@ export const Styles = StyleSheet.create({
       fontSize: 20,
       backgroundColor:'white',
       borderRadius: 5,
-      fontWeight: '100',
+      fontWeight: '500',
     },
   
     add_btn:{
       flex: 1,
       fontSize: 2,
     },
-
-    // card_cont:{
-    //   flex: 1,
-    //   borderStartColor:'red'
-    // },
   
     todo_card:{
       flexDirection: 'row',
@@ -66,7 +58,6 @@ export const Styles = StyleSheet.create({
       fontSize:22,
       letterSpacing: 1.5,
       color: "black",
-      marginBottom: 30
     },
 
     nav:{
@@ -84,6 +75,12 @@ export const Styles = StyleSheet.create({
       fontSize: 30,
       color: '#79DAE8',
       fontWeight: '500',
+    },
+
+    date_time:{
+       marginVertical: 10,
+       width: 90,
+       textAlign: "center"
     }
   });
   

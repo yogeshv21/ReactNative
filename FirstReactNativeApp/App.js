@@ -1,48 +1,54 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput, Button, SafeAreaView, Image, FlatList } from "react-native";
-import { Styles } from './style/Styles';
-import TodoCard from './component/ToDoCard';
-import Nav from './component/Nav';
+import TodoCard from './src/component/ToDoCard';
+import Nav from './src/component/Nav';
+import TxtInput from './src/component/Txtnput';
+import { Styles } from './src/style/Styles';
 
-const App = ()=>{
+const App = () => {
 
-  const [userInp, setuserInp] = React.useState('')
-  const [Usedata, Setdata] = React.useState([])
-
-  function inputValue(inputValue){
-    setuserInp(inputValue)
-  }
+  const [Usedata, Setdata] = React.useState([]);
 
   var currentdate = new Date();
-var datetime = "Date - " + currentdate.getDay() + "/" + currentdate.getMonth() 
-+ "/" + currentdate.getFullYear() + '  Time - '
-+ currentdate.getHours() + ":" 
-+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
-console.log( datetime);
+  var currentdate = new Date();
+  var date = "Date -  " + currentdate.getDay() + "/" + currentdate.getMonth() 
+  + "/" + currentdate.getFullYear() + " Time " 
+  + currentdate.getHours() + ":" 
+  + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
-  function btnPress(){
-    Setdata((currentUser)=>[...currentUser, {text: userInp, key: datetime}])
-    setuserInp('')
+
+  function btnPress(userInp) {
+    Setdata((currentUser) => [...currentUser, { text: userInp, id: date }])
   }
-  // console.log(Usedata);
 
-  return(
-   <SafeAreaView style={Styles.cont} >
-    <Nav/>
-   <FlatList data={Usedata} renderItem={
-    (itemsdata)=>{
-      return(
-        <TodoCard data={itemsdata.item.text}/>
-      )
-    } } 
-    style={Styles.card_cont}/>
-   
-    <View style={Styles.inp_btn_cont}>
-      <TextInput value={userInp} onChangeText={inputValue} placeholder='Add Todo Here' style={Styles.inp_txt}/>
-      <Button onPress={btnPress} title='Add Todo' style={Styles.add_btn}/>
-   </View>
-   </SafeAreaView>
+  function onDelete(id){
+    var b= Usedata.filter((itm)=>{
+      return itm.id !== id
+    })
+    Setdata(b)
+    console.log(Usedata);
+  }
+
+  return (
+    <SafeAreaView style={Styles.cont} >
+      <Nav />
+      <FlatList data={Usedata} renderItem={
+        (itemsdata) => {
+          return (
+            <TodoCard data={itemsdata.item.text} id={itemsdata.item.id} onDelete={onDelete}/>
+          )
+        }
+      }
+
+      keyExtractor={(item, i)=>{
+         return(
+          item.id
+         )
+      }}
+        style={Styles.card_cont} />
+      <TxtInput btnPress={btnPress} />
+    </SafeAreaView>
   )
 };
 

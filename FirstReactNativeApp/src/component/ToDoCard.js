@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, Text, Image, Button } from "react-native";
+import img from '../assets/Images/download (3).png';
 import { Styles } from '../style/Styles';
-import img from '../Images/download (3).png';
 
-const TodoCard = ({data})=>{
-  console.log(data);
+const TodoCard = ({data, id, onDelete})=>{
+
+  function deleteHandler(){
+    onDelete(id)
+  }
+
     return(
         <View style={Styles.todo_card} key={data}>
         <View style={Styles.imgCont}>
@@ -12,7 +16,8 @@ const TodoCard = ({data})=>{
         </View>
         <View style={Styles.txtCont}>
           <Text style={Styles.todo_txt}>{data}</Text>
-          <Button title='Remove'/>
+          <Text style={Styles.date_time}>{id}</Text>
+          <Button color={'#0AA1DD'} onPress={deleteHandler} title='Remove'/>
         </View>
        </View>
     )
